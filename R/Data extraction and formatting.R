@@ -8,7 +8,7 @@ SELECT *
 FROM [InformaticsLoad].[dbo].[SpeciesResultSetExpanded]
 "
 channel <- odbcDriverConnect("Driver=SQL Server; 
-                             Server=VMINFORMDEV01; Database=InformaticsLoad")
+                             Server=XXXXXXXXX; Database=XXXXXXXXXX")
 SDdata<- sqlQuery(channel,Q)
 
 
