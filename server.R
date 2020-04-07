@@ -200,19 +200,10 @@ grsp <-reactive({filter(bio.data,Species==as.character(SpeciesList[which(Species
     
     # Reactive year filter based on years available by species
     output$yearfilter<- renderUI({
-        list(tags$style(
-            ".irs-bar {",
-            "  border-color: transparent;",
-            "  background-color: transparent;",
-            "}",
-            ".irs-bar-edge {",
-            "  border-color: transparent;",
-            "  background-color: transparent;",
-            "}"
-        ),
+       
         sliderInput("year","Years", min=min(grsp()$Year, na.rm=TRUE), max=max(grsp()$Year, na.rm=TRUE), 
                     # value =c(min(grsp()$Year, na.rm=TRUE),max(grsp()$Year, na.rm=TRUE)) ,sep="", step=1)##all years
-                    value =max(grsp()$Year, na.rm=TRUE) ,sep="", step=1,animate=T))##by one year
+                    value =max(grsp()$Year, na.rm=TRUE) ,sep="", step=1,animate=T)##by one year
         
     })
     

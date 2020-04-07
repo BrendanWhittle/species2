@@ -21,7 +21,17 @@ shinyUI(
                ##### Intro #####                    
                tabPanel("Introduction",
                         
-                        tags$head(includeScript("google-analytics.js")),            
+                        tags$head(includeScript("google-analytics.js")), 
+                        tags$style(
+                          ".irs-bar {",
+                          "  border-color: transparent;",
+                          "  background-color: transparent;",
+                          "}",
+                          ".irs-bar-edge {",
+                          "  border-color: transparent;",
+                          "  background-color: transparent;",
+                          "}"
+                        ),
                         fluidRow(
                             column(width = 6,
                                    tabsetPanel(id= "tabs",
