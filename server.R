@@ -393,9 +393,8 @@ output$yearfilter.a<- renderUI({
 
 # Reactive quarter filter based on quarters available by species
 output$quarterfilter.a<- renderUI({
-    quarterlist <- unique(cc.a()$Quarter)
-    quarterlist2 = factor(append("All", as.character(quarterlist[1:4])))
-    selectInput("quarter.a","Quarter", choices=quarterlist2, selected = "All")
+    quarterlist2<-c("All",levels(na.omit(as.factor(cc.a()$Quarter))))
+ selectInput("quarter.a","Quarter", choices=quarterlist2, selected = "All")
 })
 
 # Reactive gear filter based on gears available by species
