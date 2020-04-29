@@ -181,12 +181,14 @@ shinyServer(function(input, output, session){
         if(input$species=="Horse Mackerel")
         {if(input$slideryear>2014){paste(Supp_table[which(Supp_table[,"Fish"] %in% input$species),"LandingsDist"], sep="")}
             else{}}
-        else{if(input$slideryear==2018){
-            paste("The distribution of ", input$species, " landings by Irish vessels between 2014 and ", 
-              input$slideryear, ". ",  Supp_table[which(Supp_table[,"Fish"] %in% input$species),"LandingsDist"], sep="")}
-            else{paste("The distribution of ", input$species, " landings by Irish vessels during ", 
+        else{#if(input$slideryear==2018){
+            #paste("The distribution of ", input$species, " landings by Irish vessels between 2014 and ", 
+             # input$slideryear, ". ",  Supp_table[which(Supp_table[,"Fish"] %in% input$species),"LandingsDist"], sep="")}
+            #else{
+                paste("The distribution of ", input$species, " landings by Irish vessels during ", 
               input$slideryear, ". ", 
-              Supp_table[which(Supp_table[,"Fish"] %in% input$species),"LandingsDist"], sep="")}}
+              Supp_table[which(Supp_table[,"Fish"] %in% input$species),"LandingsDist"], sep="")}
+            #}
     })
     
 ######## Length/Weight #######
@@ -284,7 +286,8 @@ grsp <-reactive({filter(bio.data,Species==as.character(SpeciesList[which(Species
             paste(input$species, "-LWdata",".csv", sep = "")
         },
         content = function(file) {
-            write.csv(grspnew.w1(), file, row.names = FALSE) 
+            #write.csv(grspnew.w1(), file, row.names = FALSE) 
+            write.csv(grsp(), file, row.names = FALSE) 
         })
     
     
@@ -464,7 +467,8 @@ output$downloadDatala <- downloadHandler(
         paste(input$species, "-LAdata", ".csv", sep = "")
     },
     content = function(file) {
-        write.csv(grspnew.a1(), file, row.names = FALSE)
+        #write.csv(grspnew.a1(), file, row.names = FALSE)
+        write.csv(cc.a(), file, row.names = FALSE)
     })
 
 output$bio_la<- renderPlotly({
