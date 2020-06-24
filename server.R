@@ -510,7 +510,7 @@ observe({
     }else{# ....
       
       x <- str_sort(as.character(unique(grspage()$ICESSubArea )),numeric = TRUE)
-      updatePickerInput(session, "subselect.a",label="ICES Areas", choices=x,selected = x)
+      updatePickerInput(session, "subselect.a",label="ICES Area", choices=x,selected = x)
       
     }}
   else{
