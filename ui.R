@@ -14,7 +14,10 @@ library(plotly)
 #library(FSA)
 library(htmltools)
 library(shinycssloaders)
+library(shinyWidgets)
+
 library(rgdal)
+library(tidyverse)
 
 shinyUI(
     navbarPage(id="TopLevelMenu", title="Species Dashboard", theme= shinytheme("cerulean"), fluid=TRUE,
@@ -138,15 +141,43 @@ shinyUI(
                                                                uiOutput("quarterfilter.a"),
                                                                uiOutput("yearfilter.a"))
                                        ),
-                                       column(width=3,
+                                       column(width=5,
                                               conditionalPanel("input.fishtab == 'A'",
-                                                               uiOutput("spatialops.w")), #- SubArea filter
+                                                               radioGroupButtons(
+                                                                 inputId = "Id",
+                                                                 label = "",
+                                                                 choices = c("ICES Area", 
+                                                                             "ICES Division"),
+                                                                 direction = "horizontal",
+                                                                 checkIcon = list(
+                                                                   yes = tags$i(class = "fa fa-check-square", 
+                                                                                style = "color: steelblue"),
+                                                                   no = tags$i(class = "fa fa-square-o", 
+                                                                               style = "color: steelblue"))
+                                                               ),
+                                                               
+                                                               
+                                                               uiOutput("spatialops.w")
+                                              ), #- SubArea filter
+                                              
                                               conditionalPanel("input.fishtab == 'A'",
                                                                downloadButton("downloadDatalw", "Download data")#,
                                                               # br(),
                                                               # downloadLink("downloadDatalw_full", "Download full dataset")
                                               ),
                                               conditionalPanel("input.fishtab == 'B'",
+                                                               radioGroupButtons(
+                                                                 inputId = "Id.a",
+                                                                 label = "",
+                                                                 choices = c("ICES Area", 
+                                                                             "ICES Division"),
+                                                                 direction = "horizontal",
+                                                                 checkIcon = list(
+                                                                   yes = tags$i(class = "fa fa-check-square", 
+                                                                                style = "color: steelblue"),
+                                                                   no = tags$i(class = "fa fa-square-o", 
+                                                                               style = "color: steelblue"))
+                                                               ),
                                                                uiOutput("spatialops.a")), #- SubArea filter
                                               conditionalPanel("input.fishtab == 'B'",                 
                                                                downloadButton("downloadDatala", "Download data",class="btn btn-outline-primary")#,
@@ -196,7 +227,7 @@ shinyUI(
                                                                         tags$small("*age range based on age readings and lengths taken from fish sampled at ports and the stockbook"))),
                                                         hr(),
                                                         column(width=5,actionButton("showhist",label = "Show Histogram")), 
-                                                        plotOutput("age_hist")
+                                                        plotlyOutput("age_hist")
                                                ),
                                                tabPanel("Distribution",value= "C",
                                                        

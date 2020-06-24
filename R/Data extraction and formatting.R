@@ -1,4 +1,5 @@
 library(RODBC)
+library(plyr)
 library(dplyr)
 library(lubridate)
 library(plotly)
@@ -16,7 +17,7 @@ SDdata<- sqlQuery(channel,Q)
 #saveRDS(SDdata, file = "FullData.rds")
 ###################################################
 
-####Some of the species in table SpeciesResultSetExpanded chaned since last updates data in 2019#####
+####Some of the species in table SpeciesResultSetExpanded changed since last updates data in 2019#####
 ####use Species table to compare names
 Q<- "
 SELECT *
@@ -37,7 +38,7 @@ com_sp[c(3,22,24,28)]
 
 
 
-
+sp<-SDdata
 
 ####### Formatting #######
 #SDdata<-readRDS("Data/FullData.rds")
@@ -91,7 +92,21 @@ cc.length <- cc.length[cc.length$Weight>0,]
 
 bio.data<- cc.length
 bio.data.sample <- sample_frac(bio.data, 0.1)
-saveRDS(bio.data, file = "Data/bio.data.sample20200319.rds")
+
+bio.data<-filter(bio.data,Year!=2020)
+bio.data<-droplevels(filter(bio.data,ICESSubArea!="U    "))
+bio.data$ICESSubArea<-paste0("27.",bio.data$ICESSubArea)
+bio.data$ICESSubArea<-trimws(bio.data$ICESSubArea)
+bio.data$ICESDiv<-trimws(bio.data$ICESDiv)
+bio.data$ICESSubArea<-as.factor(bio.data$ICESSubArea)
+bio.data$ICESDiv<-as.factor(bio.data$ICESDiv)
+levels(bio.data$ICESDiv)[10]<-"(unclassified)" #renaming "U"
+bio.data$ICESDivFullNameN<-droplevels(interaction(bio.data$ICESSubArea,bio.data$ICESDiv))
+
+bio.data$ICESSubArea<-as.factor(bio.data$ICESSubArea)
+bio.data$ICESDivFullNameN<-as.factor(bio.data$ICESDivFullNameN)
+
+saveRDS(bio.data, file = "Data/bio.data20200319.rds")
 
 ### Age ###
 bio.data.age <- SDdata
@@ -107,11 +122,22 @@ cc.age <- cc.age %>%
 cc.age <- cc.age %>%
   mutate(AgeContin = cc.age$Age + cc.age$justdecimal)
 cc.age <- cc.age[!cc.age$Age <0.1,]
-#saveRDS(cc.age, file= "Data/CompleteAgeCases20200319.rds") ##change to todays date before running
+cc.age<-filter(cc.age,Year!=2020)
+cc.age<-droplevels(filter(cc.age,ICESSubArea!="U    "))
+cc.age$ICESSubArea<-paste0("27.",cc.age$ICESSubArea)
+cc.age$ICESSubArea<-trimws(cc.age$ICESSubArea)
+cc.age$ICESDiv<-trimws(cc.age$ICESDiv)
+cc.age$ICESSubArea<-as.factor(cc.age$ICESSubArea)
+cc.age$ICESDiv<-as.factor(cc.age$ICESDiv)
+levels(cc.age$ICESDiv)[10]<-"(unclassified)" #renaming "U"
+cc.age$ICESDivFullNameN<-droplevels(interaction(cc.age$ICESSubArea,cc.age$ICESDiv))
 
-#cc.age <-  readRDS(file="CompleteAgeCases20200319.rds")
-cc.age.sample <- sample_frac(cc.age, 0.1)
-saveRDS(cc.age.sample, file = "Data/cc.age.sample20200319.rds")
+cc.age$ICESSubArea<-as.factor(cc.age$ICESSubArea)
+cc.age$ICESDivFullNameN<-as.factor(cc.age$ICESDivFullNameN)
+
+saveRDS(cc.age, file = "Data/cc.age20200319.rds")
+
+
 
 
 #########SpeciesList for server.R####
