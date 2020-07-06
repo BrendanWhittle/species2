@@ -107,6 +107,15 @@ shinyServer(function(input, output, session){
     output$tabpic5<-renderImage({
         filename <- normalizePath(file.path('www/Ageing',paste("agedexample",'.png', sep='')))
         list(src = filename, width =400, height= 250)}, deleteFile = FALSE)
+    output$tabpic6a<-renderImage({
+      filename <- normalizePath(file.path('www',paste("DC",'.jpeg', sep='')))
+      list(src = filename, width =650, height= 350)}, deleteFile = FALSE)
+    output$tabpic6b<-renderImage({
+      filename <- normalizePath(file.path('www',paste("RV1",'.jpeg', sep='')))
+      list(src = filename, width =450, height= 250)}, deleteFile = FALSE)
+    output$tabpic6c<-renderImage({
+      filename <- normalizePath(file.path('www',paste("RV2",'.jpeg', sep='')))
+      list(src = filename, width =450, height= 250)}, deleteFile = FALSE)
     output$intro_tabset1<- renderText({
         as.character(Supp_table[which(Supp_table[,"Fish"] == "All Species"),"biology"])})
     output$intro_tabset2a<- renderText({
@@ -127,6 +136,8 @@ shinyServer(function(input, output, session){
         as.character(Supp_table[which(Supp_table[,"Fish"] == "All Species"),"Ageing"])})
     output$intro_tabset5b <- renderText({
         as.character(Supp_table[which(Supp_table[,"Fish"] == "All Species"),"Ageing2"])})
+    output$intro_tabset6 <- renderText({
+      as.character(Supp_table[which(Supp_table[,"Fish"] == "All Species"),"DataCol"])})
     
     ####### Fish Species page #######
     output$fish_b1a<- renderText({

@@ -36,7 +36,7 @@ shinyUI(
                           "}"
                         ),
                         fluidRow(
-                            column(width = 6,
+                            column(width = 7,
                                    tabsetPanel(id= "tabs",
                                                tabPanel("Fishing Grounds", value = "A", 
                                                         p(), htmlOutput("intro_tabset1"),
@@ -69,10 +69,14 @@ shinyUI(
                                                         fluidRow(column(6,
                                                                         imageOutput("tabpic5"),
                                                                         offset=2)),
-                                                        fluidRow(column(12,htmlOutput("intro_tabset5b"),style = "margin-top:-8em")))
+                                                        fluidRow(column(12,htmlOutput("intro_tabset5b"),style = "margin-top:-8em"))),
+                                               tabPanel("Data Collection",value = "F",
+                                                        p(), htmlOutput("intro_tabset6"),
+                                                        br(),br(),br(),imageOutput("tabpic6a"))
+                                               
                                    )#close tabsetPanel     
                             ), #close column
-                            column(width = 6,
+                            column(width = 5,
                                    conditionalPanel(condition = "input.tabs == 'A'",
                                                     imageOutput("fgmap1",height ="100%")),
                                    conditionalPanel(condition = "input.tabs == 'B'",
@@ -99,7 +103,12 @@ shinyUI(
                                                     br(),
                                                     htmlOutput("intro_tabset4a")),     
                                    conditionalPanel(condition = "input.tabs == 'E'",
-                                                    imageOutput("fgmap5"))
+                                                    imageOutput("fgmap5")),
+                                   conditionalPanel(condition = "input.tabs == 'F'",
+                                                    fluidRow(column(12,imageOutput("tabpic6b",height ="100%"))),
+                                                    br(),
+                                                    fluidRow(column(12,imageOutput("tabpic6c",height ="100%")))
+                                                   )
                             )#close column
                         ) #close fluidRow1 
                ), #close tabPanel 
