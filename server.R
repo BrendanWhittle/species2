@@ -108,14 +108,14 @@ shinyServer(function(input, output, session){
         filename <- normalizePath(file.path('www/Ageing',paste("agedexample",'.png', sep='')))
         list(src = filename, width =400, height= 250)}, deleteFile = FALSE)
     output$tabpic6a<-renderImage({
-      filename <- normalizePath(file.path('www',paste("DC",'.jpeg', sep='')))
-      list(src = filename, width =650, height= 350)}, deleteFile = FALSE)
+      filename <- normalizePath(file.path('www',paste("Data",'.jpg', sep='')))
+      list(src = filename, width =750, height= 250)}, deleteFile = FALSE)
     output$tabpic6b<-renderImage({
-      filename <- normalizePath(file.path('www',paste("RV1",'.jpeg', sep='')))
-      list(src = filename, width =450, height= 250)}, deleteFile = FALSE)
-    output$tabpic6c<-renderImage({
-      filename <- normalizePath(file.path('www',paste("RV2",'.jpeg', sep='')))
-      list(src = filename, width =450, height= 250)}, deleteFile = FALSE)
+      filename <- normalizePath(file.path('www',paste("Sampled",'.png', sep='')))
+      list(src = filename, width =500, height= 550)}, deleteFile = FALSE)
+    # output$tabpic6c<-renderImage({
+    #   filename <- normalizePath(file.path('www',paste("RV2",'.jpeg', sep='')))
+    #   list(src = filename, width =450, height= 250)}, deleteFile = FALSE)
     output$intro_tabset1<- renderText({
         as.character(Supp_table[which(Supp_table[,"Fish"] == "All Species"),"biology"])})
     output$intro_tabset2a<- renderText({
@@ -138,7 +138,10 @@ shinyServer(function(input, output, session){
         as.character(Supp_table[which(Supp_table[,"Fish"] == "All Species"),"Ageing2"])})
     output$intro_tabset6 <- renderText({
       as.character(Supp_table[which(Supp_table[,"Fish"] == "All Species"),"DataCol"])})
-    
+    output$intro_tabset6a <- renderText({
+      as.character(Supp_table[which(Supp_table[,"Fish"] == "All Species"),"Catchmap"])})
+    output$intro_tabset6b <- renderText({
+      as.character(Supp_table[which(Supp_table[,"Fish"] == "All Species"),"Catch"])})
     ####### Fish Species page #######
     output$fish_b1a<- renderText({
         as.character(Supp_table[which(Supp_table[,"Fish"] %in% input$species),"b1a"])

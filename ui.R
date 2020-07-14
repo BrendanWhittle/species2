@@ -72,7 +72,11 @@ shinyUI(
                                                         fluidRow(column(12,htmlOutput("intro_tabset5b"),style = "margin-top:-8em"))),
                                                tabPanel("Data Collection",value = "F",
                                                         p(), htmlOutput("intro_tabset6"),
-                                                        br(),br(),br(),imageOutput("tabpic6a"))
+                                                        htmlOutput("intro_tabset6b"),
+                                                        tags$a(href = "https://www.dcmap-ireland.ie/", 
+                                                               "Learn More", 
+                                                               target="_blank"),
+                                                       imageOutput("tabpic6a"))
                                                
                                    )#close tabsetPanel     
                             ), #close column
@@ -105,9 +109,8 @@ shinyUI(
                                    conditionalPanel(condition = "input.tabs == 'E'",
                                                     imageOutput("fgmap5")),
                                    conditionalPanel(condition = "input.tabs == 'F'",
-                                                    fluidRow(column(12,imageOutput("tabpic6b",height ="100%"))),
-                                                    br(),
-                                                    fluidRow(column(12,imageOutput("tabpic6c",height ="100%")))
+                                                   imageOutput("tabpic6b",height ="100%"),
+                                                   htmlOutput("intro_tabset6a")
                                                    )
                             )#close column
                         ) #close fluidRow1 
@@ -247,7 +250,11 @@ shinyUI(
                                                           "The Digital Stockbook",target="_blank"),
                                                         p(),
                                                         a(href=paste0("https://www.marine.ie"),
-                                                          "The Marine Institute webpage",target="_blank"))
+                                                          "The Marine Institute webpage",target="_blank"),
+                                                        p(),
+                                                        "For any quaries contact",
+                                                       a("informatics@marine.ie",href="informatics@marine.ie")
+                                                        )
                                    )#close tabsetPanel
                             )#close column
                         )#close fluidRow   
